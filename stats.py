@@ -2,7 +2,7 @@
 def get_num_words(text):
     word_list = text.split() # Text wird in Liste mit Worten geteilt
     word_count = len(word_list) # Anzahl Einträge in Liste
-    print(f"{word_count} words found in the document")
+    return word_count
 
 # Zeichenanzahl aus Text wird gezählt und in Dict geschrieben (nur Kleinbuchstaben)
 def get_num_letters(text):
@@ -13,4 +13,19 @@ def get_num_letters(text):
             dict_letters[letter] += 1
         else:
             dict_letters[letter] = 1
-    print(dict_letters)
+    return dict_letters
+
+# Rückgabe des Keys für Sortierung
+def sort_on(items):
+    return items["num"]
+
+# Erzeugen einer sortierten List of Dicts
+def sort_dictionary(letter_count):
+    letter_sort = []
+    for key in letter_count:
+        dict_entry = {}
+        dict_entry["char"] = key
+        dict_entry["num"] = letter_count[key]
+        letter_sort.append(dict_entry)
+    letter_sort.sort(reverse=True, key=sort_on) # Liste nach Häufigkeit sortieren und zurückgeben
+    return letter_sort

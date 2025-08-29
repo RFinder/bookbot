@@ -1,3 +1,5 @@
+# Import sys-Modul
+import sys
 # Import von statistiscchen Funktionen
 from stats import get_num_words
 from stats import get_num_letters
@@ -11,7 +13,14 @@ def get_book_text(filepath):
 
 
 def main():
-    book_path = "books/frankenstein.txt" # Buchpfad festlegen
+    # Abfangen, falls Systemeingabe nur 1 Argument hat
+    try:
+        book_path = sys.argv[1] # Buchpfad wird über Terminal eingegeben
+    except IndexError:
+        print("Second Argument is missing!")
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1) # Programm nach Fehlerausgabe beenden
+
     book_text = get_book_text(f"./{book_path}") # Buch in String einlesen
     word_count = get_num_words(book_text) # Wortanzahl bestimmen
     letter_dict = get_num_letters(book_text) # Buchstaben und Häufigkeit bestimmen
